@@ -3,14 +3,19 @@ import argparse
 from chainer import serializers
 from chainer.links.caffe import CaffeFunction
 from googlenetbn import GoogleNetBN
+from func.dataset_function import dataset_label
 
 
 def convert_caffe2chainer():
 
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("--dataset", default="dataset")
-    # args = parser.parse_args()
-    #
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", default="dataset")
+    args = parser.parse_args()
+
+    # Get the label data used for training.
+    # It use for getting number of class when classifing
+    b_names, _, label_name = dataset_label(args.dataset)
+    n_calss = len(b_names)
 
     print('start loading model file...')
     caffe_model = CaffeFunction('googlenet.caffemodel')
@@ -18,7 +23,7 @@ def convert_caffe2chainer():
 
     # copy parameters from caffemodel into chainer model
     print('start copy params.')
-    googlenet = GoogleNetBN(n_class=1000)
+    googlenet = GoogleNetBN(n_class=n_calss)
 
     googlenet.conv1.W.data = caffe_model['conv1/7x7_s2'].W.data
     googlenet.conv2.W.data = caffe_model['conv2/3x3'].W.data
@@ -109,6 +114,8 @@ def convert_caffe2chainer():
     googlenet.inc5b.proj3.W.data = caffe_model['inception_5b/3x3_reduce'].W.data
     googlenet.inc5b.proj33.W.data = caffe_model['inception_5b/double3x3_reduce'].W.data
     googlenet.inc5b.poolp.W.data = caffe_model['inception_5b/pool_proj'].W.data
+
+    # Using imagenet
 
     googlenet.loss1_conv.W.data = caffe_model["loss1/conv"].W.data
     googlenet.loss1_fc1.W.data = caffe_model["loss1/fc"].W.data
