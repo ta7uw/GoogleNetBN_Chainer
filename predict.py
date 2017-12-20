@@ -10,11 +10,11 @@ from func.resize import resize
 from googlenetbn import GoogleNetBN
 
 
-def item_predict():
+def predict():
     parser = argparse.ArgumentParser(description="Predict item of image file ")
     parser.add_argument("--dataset", default="dataset")
     parser.add_argument("pretrained_model")
-    parser.add_argument("iamge")
+    parser.add_argument("image")
     args = parser.parse_args()
 
     # Get the label data used for training.
