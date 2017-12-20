@@ -43,4 +43,4 @@ def predict():
     print("score:", score)
 
 if __name__ == '__main__':
-    item_predict()
+    predict()
