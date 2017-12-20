@@ -22,7 +22,7 @@ def predict():
     b_names, _, label_name = dataset_label(args.dataset)
 
     model = GoogleNetBN(n_class=len(b_names))
-    chainer.serializers.load_npz(args.pretained_model, model)
+    chainer.serializers.load_npz(args.pretrained_model, model)
     mean = compute_mean(dataset_path=args.dataset, insize=model.insize).mean(axis=(1, 2))
     image = args.image
     image = Image.open(image)
