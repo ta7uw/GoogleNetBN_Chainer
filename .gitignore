@@ -6,3 +6,7 @@
 
 .idea/
 __pycache__/
+
+
+## trained model
+tuned_googlentbn.npz
