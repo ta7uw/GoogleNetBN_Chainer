@@ -36,7 +36,7 @@ def predict():
 
     chainer.config.train = False
     y = model.predict(image)
-    y = y.data
+    y = y.data[0]
 
     pred = b_names[int(y.argmax())]
     score = y.max()
