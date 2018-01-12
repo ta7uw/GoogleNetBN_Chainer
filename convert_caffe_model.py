@@ -19,6 +19,8 @@ def convert_caffe2chainer():
 
     print('start loading model file...')
     caffe_model = CaffeFunction('googlenet.caffemodel')
+    for layer in caffe_model.layers:
+        print(layer)
     print('Done.')
 
     # copy parameters from caffemodel into chainer model
@@ -79,6 +81,8 @@ def convert_caffe2chainer():
     googlenet.inc4c.conv33b.W.data = caffe_model['inception_4c/double3x3b'].W.data
     googlenet.inc4c.proj3.W.data = caffe_model['inception_4c/3x3_reduce'].W.data
     googlenet.inc4c.proj33.W.data = caffe_model['inception_4c/double3x3_reduce'].W.data
+    print(googlenet.inc4c.proj_pool.W.shape)
+    print(caffe_model['inception_4c/pool_proj'].W.shape)
     googlenet.inc4c.poolp.W.data = caffe_model['inception_4c/pool_proj'].W.data
 
     # inc4d

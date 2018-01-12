@@ -87,6 +87,10 @@ def train_run(train_data, epoch, batchsize,
     trainer.extend(extensions.observe_lr(), trigger=log_interval)
     trainer.extend(extensions.PrintReport(
         ['epoch',
+         'iteration',
+         'main/loss1',
+         'main/loss2',
+         'main/loss3',
          'main/loss',
          'main/accuracy',
          'validation/main/loss',
