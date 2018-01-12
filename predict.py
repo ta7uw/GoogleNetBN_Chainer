@@ -34,7 +34,6 @@ def predict():
 
     chainer.config.train = False
     y = model.predict(image)
-    y = chainer.functions.softmax(y)
     y = y.data
 
     pred = b_names[int(y.argmax())]
