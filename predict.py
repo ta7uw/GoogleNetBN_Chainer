@@ -31,6 +31,7 @@ def predict():
     image = image - mean[:, None, None]
     image = image.astype(np.float32)
     image *= (1.0 / 255.0)  # Scale to [0,1]
+    image = image[np.newaxis, :]
 
     chainer.config.train = False
     y = model.predict(image)
