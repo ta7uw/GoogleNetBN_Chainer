@@ -27,6 +27,7 @@ def predict():
     image = args.image
     image = Image.open(image)
     image = np.asarray(image, dtype=np.float32)
+    image = image.transpose(2, 0, 1)
     image = resize(image, model.insize)
     image = image - mean[:, None, None]
     image = image.astype(np.float32)
