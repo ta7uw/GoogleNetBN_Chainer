@@ -98,7 +98,7 @@ class GoogleNetBN(chainer.Chain):
         h = self.loss3_fc(h)
         loss3 = F.softmax_cross_entropy(h, t)
 
-        loss = 0.03 * (loss1 + loss2) + loss3
+        loss = 0.3 * (loss1 + loss2) + loss3
         accuracy = F.accuracy(h, t)
 
         chainer.report({
