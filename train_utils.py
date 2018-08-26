@@ -54,10 +54,6 @@ def train_run(train_data, epoch, batchsize,
         print("Load model")
         chainer.serializers.load_npz("tuned_googlenetbn.npz", model)
 
-    if gpu >= 0:
-        chainer.cuda.get_device_from_id(gpu).use()
-        model.to_gpu()
-
     if loaderjob <= 0:
         train_iter = chainer.iterators.SerialIterator(train, batchsize)
         val_iter = chainer.iterators.SerialIterator(val, batchsize, shuffle=False, repeat=False)
